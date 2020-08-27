@@ -1,12 +1,13 @@
-From e7dec8333dc5d287b9d92ea9aa88bf4e8eef72af Mon Sep 17 00:00:00 2001
+From 1717cc66205b1df9d01fec4410b66e448f0a45ea Mon Sep 17 00:00:00 2001
 From: Jason Kridner <jdk@ti.com>
 Date: Thu, 27 Aug 2020 02:00:14 -0400
 Subject: [PATCH] mikroBUS build fixes
 
 ---
  drivers/misc/mikrobus/Makefile            | 5 ++---
+ drivers/misc/mikrobus/mikrobus_core.c     | 2 ++
  drivers/misc/mikrobus/mikrobus_manifest.c | 4 ++--
- 2 files changed, 4 insertions(+), 5 deletions(-)
+ 3 files changed, 6 insertions(+), 5 deletions(-)
 
 diff --git a/drivers/misc/mikrobus/Makefile b/drivers/misc/mikrobus/Makefile
 index af7256510310..05a6ec3a013d 100644
@@ -23,6 +24,19 @@ index af7256510310..05a6ec3a013d 100644
 \ No newline at end of file
 +obj-$(CONFIG_MIKROBUS) += mikrobus_port.o
 +mikrobus-y := mikrobus_core.o mikrobus_manifest.o
+diff --git a/drivers/misc/mikrobus/mikrobus_core.c b/drivers/misc/mikrobus/mikrobus_core.c
+index f1ccd4b4d5a2..7ac51c74d0fb 100644
+--- a/drivers/misc/mikrobus/mikrobus_core.c
++++ b/drivers/misc/mikrobus/mikrobus_core.c
+@@ -689,6 +689,8 @@ static void __exit mikrobus_exit(void)
+ }
+ module_exit(mikrobus_exit);
+ 
++EXPORT_SYMBOL(MIKROBUS_PINCTRL_STR);
++
+ MODULE_AUTHOR("Vaishnav M A <vaishnav@beagleboard.org>");
+ MODULE_DESCRIPTION("mikroBUS main module");
+ MODULE_LICENSE("GPL v2");
 diff --git a/drivers/misc/mikrobus/mikrobus_manifest.c b/drivers/misc/mikrobus/mikrobus_manifest.c
 index 629720b4c0fa..077d61e006b0 100644
 --- a/drivers/misc/mikrobus/mikrobus_manifest.c
